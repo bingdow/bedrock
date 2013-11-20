@@ -1,0 +1,201 @@
+{# This Source Code Form is subject to the terms of the Mozilla Public
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/. #}
+
+{% extends "/mocotw/base-resp.html" %}
+
+{% from 'macros.html' import facebook_share_url, twitter_share_url %}
+
+{% block page_title_prefix %}美商謀智 － {% endblock %}
+{% block page_title %}Firefox 瀏覽器官方免費下載{% endblock %}
+{% block page_desc %}Mozilla Firefox 瀏覽器官方下載。Mozilla 是一個全球化的非營利組織，致力於打造開放自由的網路未來。官網提供最新部落格文、最新活動訊息、校園專案、社群專案、參與方式、工作機會... 等各式相關訊息。我們是 Mozilla。{% endblock %}
+{% block body_id %}home{% endblock %}
+{% block body_class %}sand{% endblock %}
+
+{% block extra_meta %}
+  <!-- validates bing webmaster tools -->
+  <meta name="msvalidate.01" content="B7B177115A634927D608514DA17B2574"/>
+{% endblock %}
+
+{% block extrahead %}
+  {{ css('moco_home') }}
+{% endblock %}
+
+{% block string_data %}
+  data-close='{{ _('Close') }}'
+  data-share='{{ _('Share') }}'
+{% endblock %}
+
+{% block js %}
+  {{ js('moco_home') }}
+{% endblock %}
+
+{% block content %}
+
+  <hgroup id="main-feature" class="huge">
+    {# L10n: The Mozilla wordmark appears inline as part of this headline, so it reads as "We are Mozilla". The alt text should not be translated. #}
+    <h1>我們是 <img src="{{ media('img/home/title-wordmark.png') }}" alt="Mozilla" height="92" width="348"></h1>
+
+    <h2>Doing good is part of our code</h2>
+  </hgroup>
+
+  <section id="firefox-promo" class="billboard">
+    <h3>設計與眾不同</h3>
+    {# We intentionally don't use php_url() here because all locals
+   # are seeing this English page and we want them to hit their locale for
+   # firefox pages #}
+    <a href="/firefox/" id="firefox-promo-link">
+      <img src="{{ media('img/home/firefox.png?2013-06') }}" id="promo-logo" alt="Firefox">
+    </a>
+    <ul class="features">
+      {# L10n: Small piece of text that appears to the side of the download button on the homepage. #}
+      <li>
+        <small>以非營利<br>為榮</small>
+      </li>
+      {# L10n: Small piece of text that appears to the side of the download button on the homepage. #}
+      <li>
+        <small>提供<br>創新</small>
+      </li>
+      {# L10n: Small piece of text that appears to the side of the download button on the homepage. #}
+      <li>
+        <small>快速、百變、<br>安全</small>
+      </li>
+    </ul>
+
+    {{ download_firefox(small=True, icon=False) }}
+  </section>
+
+  <section id="home-promo" class="pager pager-with-tabs pager-auto-rotate pager-no-history pager-with-hidden-class">
+
+    <div class="pager-content">
+
+    <div class="pager-page default-page" id="promo-lightbeam">
+      <a href="{{ url('lightbeam.lightbeam') }}" class="container">
+        <div class="content">
+          <h3>Lightbeam for Firefox</h3>
+          <h4>看誰在網路上追蹤你</h4>
+          <p class="go">瞭解更多</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="pager-page" id="promo-every-moment">
+      <a href="http://firefox.club.tw/campaign/every-moment/" class="container">
+        <div class="content">
+          <h3>Firefox OS 讓你盡情享受每一刻</h3>
+          <h4>上傳自己生活中美好一刻的照片至活動網站與 Firefox OS 相框結合，在投票期間請好友為自己投票，就有機會獲得 Firefox OS 手機</h4>
+          <p class="go">馬上參加</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="pager-page" id="promo-firefoxos-lookahead">
+      <a href="{{ url('firefox.os.index') }}" class="container">
+        <div class="content">
+          <h3>大步向前</h3>
+          <h4>Firefox OS 讓你活在當下、盡情分享、共同打造 Web 的美好未來！</h4>
+          <p class="go">瞭解更多</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="pager-page" id="promo-firefoxpage">
+      <a href="{{ url('firefox.download') }}" class="container">
+        <div class="content">
+          <h3>全新 Firefox</h3>
+          <h4>更快速、更流暢、全方位瀏覽器。</h4>
+          <p class="go">馬上下載</p>
+        </div>
+        {{ download_firefox(icon=False, small=True, force_full_installer=False, force_direct=True) }}
+      </a>
+    </div>
+
+    <div class="pager-page" id="promo-firefoxmobile">
+      <a href="{{ url('firefox.mobile.features') }}" class="container">
+        <div class="content">
+          {# L10n: Firefox for Android tagline. #}
+          <h3>全新 Firefox 行動版</h3>
+          <h4>智慧型瀏覽器，繁體中文全面支援。</h4>
+          <p class="go">馬上下載</p>
+        </div>
+        {{ download_firefox(icon=False, mobile=True, small=True) }}
+      </a>
+    </div>
+
+
+    </div>
+
+    <ul class="pager-tabs">
+      <li><a tabindex="-1" aria-hidden="true" href="#p1"></a></li>
+      <li><a tabindex="-1" aria-hidden="true" href="#p2"></a></li>
+      <li><a tabindex="-1" aria-hidden="true" href="#p3"></a></li>
+      <li><a tabindex="-1" aria-hidden="true" href="#p4"></a></li>
+      <li><a tabindex="-1" aria-hidden="true" href="#p5"></a></li>
+    </ul>
+
+  </section>
+
+  <div id="main-content">
+
+    <section id="home-news">
+      <h3>發燒部落文</h3>
+      <ul>
+      </ul>
+    </section>
+
+    <section id="home-promos">
+      <h3>最新活動</h3>
+      <ul>
+      </ul>
+    </section>
+
+    <section id="home-about">
+      <ul>
+          <li>
+            <a href='/community/student/' id="reps">
+              <h4>Firefox 校園大使</h4>
+              <p>加入 Firefox 校園大使，流下熱血、青春、自由的全紀錄</p>
+            </a>
+          </li>
+          <li>
+            <a href='https://www.facebook.com/MozillaTaiwan' id="fb_mozilla_tw">
+              <h4>Mozilla Taiwan 粉絲團</h4>
+              <p>所有Firefox 相關最新活動、資訊、新聞盡在FB</p>
+            </a>
+          </li>
+          <li>
+            <a href='http://tech.mozilla.com.tw' id="moztech">
+              <h4>謀智台客部落格</h4>
+              <p>所有技術討論、Firefox OS 相關資訊都在此、歡迎你來互相交流</p>
+            </a>
+          </li>
+          <li>
+            <a href='/community/' id="community">
+              <h4>參與我們</h4>
+              <p>支持和幫助我們建立更好的網絡</p>
+            </a>
+          </li>
+          <li>
+            <a href='/about/careers/' id="careers">
+              <h4>工作機會</h4>
+              <p>歡迎有共同理念與熱情的伙伴加入我們</p>
+            </a>
+          </li>
+          <li>
+            <a href='http://myfirefox.com.tw/' id="myfirefox" target="_blank" onClick="_gaq.push(['_trackEvent', 'Myfirefox', 'index_icon', '']);">
+              <h4>MyFirefox</h4>
+              <p>台灣版Firefox全新正體中文首頁，讓您每天都能享受最新科技新知</p>
+            </a>
+          </li>
+      </ul>
+    </section>
+
+  <div id="firefox_store">
+    <a href="http://tw.mall.yahoo.com/store/firefox" target="Firefox Online 火狐商城" onClick="_gaq.push(['_trackEvent', 'Myfirefox', 'store_banner', '']);" target="_blank">
+      Firefox Online 火狐商城
+    </a>
+  </div>
+  </div>
+
+
+{% endblock %}

@@ -1,0 +1,131 @@
+{# This Source Code Form is subject to the terms of the Mozilla Public
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/. #}
+
+{% extends "base-resp.html" %}
+
+{% block page_title %}Ligthbeam for Firefox{% endblock %}
+{% block body_id %}lightbeam{% endblock %}
+{% block body_class %}sky about{% endblock %}
+{% block page_favicon %}{{ media('img/lightbeam/favicon.png') }}{% endblock %}
+{% block site_header_logo %}
+  <h2><a href="{{ url('lightbeam.lightbeam') }}"><img src="{{ media('img/lightbeam/lightbeam_logo-wordmark_500x156.png') }}" class="ligthbeam-wordmark"></a></h2>
+{% endblock %}
+{% block site_header_nav %}
+  <span class="toggle" role="button" aria-controls="nav-main-menu" tabindex="0">{{_('Menu')}}</span>
+  <nav id="nav-main" role="navigation">
+    <ul id="nav-main-menu">
+      <li><a href="{{ url('lightbeam.lightbeam') }}">首頁</a></li>
+      <li><b>有關 Lightbeam</b></li>
+  </ul>
+  </nav>
+{% endblock %}
+
+{% block extrahead %}
+  {{ css('lightbeam') }}
+{% endblock %}
+
+{% block js %}
+  {{ js('lightbeam') }}
+{% endblock %}
+
+{% block content %}
+
+<section id="primary" class="container text-center">
+  <h1 class="page-slogan">有關 Lightbeam</h1>
+</section>
+
+<section id="secondary" class="container">
+  <div class="span7">
+    <h2>Lightbeam 的運作方式</h2>
+    <p>
+      不論是使用者瀏覽中的網站，或是於該網站中活躍的第三方網站，Lightbeam 均能即時呈現網站之間的關係。
+    </p>
+    <p>
+      Lightbeam 共使用 3 種互動式的圖表 — Graph、Clock、List，讓你能檢視網頁瀏覽過程中的所有第三方網站，並得知它們從何處取得使用者的線上活動，讓使用者透過此特殊的呈現方式更了解 Web。
+    </p>
+    <p>
+      預設的「Graph」檢視方式，將即時呈現你所瀏覽的各個網站，以及瀏覽器發出請求的所有第三方網站。Graph 另具備可調整的篩選功能，讓你能觀察更多資料型態。「Clock」則可讓你檢查過去 24 小時內的連線。「List」則能針對各個網站，提供更深入的檢視選項。而在 List 中的「Site preferences」則能讓你阻擋網站連上自己的 Firefox 瀏覽器、觀察你感興趣的網站，或隱藏你不想看到的網站。
+    </p>
+    <p>
+      Lightbeam 另具備資訊面板，針對你所選擇的網站及其連線的網站，均可提供額外的詳細資訊。
+    </p>
+  </div>
+  <div class="span5">
+    <br/><br/><br/><br/>
+    <img src="{{ media('img/lightbeam/Lightbeam-AMOScreenshot1_anon.jpg') }}" alt="">
+  </div>
+
+</section>
+
+<section class="container">
+  <div class="span6">
+    <br/><br/><br/>
+    <div class="text-center"><img src="{{ media('img/lightbeam/Lightbeam-meet-firefox.png') }}" alt=""></div>
+  </div>
+  <div class="span6">
+    <h2>Lightbeam 的起源</h2>
+    <p>
+       Lightbeam 源自於 2011 年 7 月開始的 Collusion 專案。Mozilla 軟體開發者 <a href="http://www.toolness.com/wp/" target="_blank">Atul Varma</a> 受到《<i>The Filter Bubble</i>》一書的啟發，進而構思出了 Collusion 個人專案，嘗試以實驗性的附加元件呈現 Web 上的瀏覽行為與資料蒐集作業。
+    </p>
+    <p>
+      在 2012 年 2 月，Gary Kovacs (時任 Mozilla CEO) 則在一次揭露線上追蹤作業的 <a href="http://www.ted.com/talks/gary_kovacs_tracking_the_trackers.html" target="_blank">TED talk</a> (現已成為最多觀賞次數的 TED talks 之一) 討論活動中，為大家介紹了 Collusion 附加元件。
+    </p>
+    <p>
+      到 2012 年 9 月，Mozilla 獲得<a href="https://www.ecuad.ca/" target="_blank">艾蜜莉卡藝術及設計大學 (Emily Carr University of Art and Design)</a> 學生的鼎力相助，為此附加元件開發了視覺化的呈現效果。再加上福特基金會 (Ford Foundation) 與自然科學與工程研究委員會 (Natural Sciences and Engineering Research Council，NSERC) 的贊助，終於在 2013 年秋季發表了新一代的 Lightbeam。
+    </p>
+    <p>
+      若要進一步了解合作細節，可至 <a href="http://www.simcentre.ca" target="_blank">http://www.simcentre.ca</a>
+    </p>
+  </div>
+</section>
+
+<section class="container">
+  <div class="span6">
+    <h2>宏觀的追蹤透明化策略</h2>
+    <p>
+      Mozilla 將使用者放在第一位，深信每個人都應能控制自己的線上隱私，也有權利知道有哪些第三方在蒐集自己的資料。透過 Lightbeam 附加元件與資料庫，我們將提供開放且可貴的社群研究平台，藉以提高公眾認知、提升分析效能，以期最後能打破目前線上追蹤與隱私性的黑盒子，並造成實質性的影響。Mozilla 的長遠目標，就是要讓 Web 使用者能進一步掌握個人線上資料的透明度，而 Lightbeam 不過是其中一步而已。
+    </p>
+  </div>
+  <div class="span6">
+    <h2>進一步了解線上追蹤與個人隱私</h2>
+    <p>
+      <a href="http://www.mozilla.org/en-US/foundation/" target="_blank">Mozilla 基金會</a>是全球性的非營利組織，以推動網路的平等、自由、開放為宗旨。而 Mozilla 社群發現線上隱私的相關性日趨緊密，進而開始支援多樣的問題解決方案。
+      <ul>
+      可參閱：
+        <li><a href="http://stopwatching.us" target="_blank">stopwatching.us</a></br></li>
+        <li><a href="{{ url('firefox.dnt') }}" target="_blank">mozilla.com.tw/dnt/</a></li>
+      </ul>
+    </p>
+  </div>
+</section>
+
+<section class="container">
+  <div class="span6">
+    <h2>Lightbeam 的資料格式</h2>
+    <p>
+      可參閱 <a href="https://github.com/mozilla/lightbeam/blob/master/doc/data_format.v1.1.md" target="_blank">Github 上的說明文件</a>，進一步了解 Lightbeam 所使用的檔案格式。若你決定要貢獻自己的 Lightbeam 資料，亦可參閱資料上傳的相關細節。
+    </p>
+  </div>
+  <div class="span6">
+    <img src="{{ media('img/lightbeam/Lightbeam-list-view.jpg') }}" alt="">
+  </div>
+</section>
+
+<section class="container">
+  <h2>Lightbeam 合作夥伴</h2>
+  <div class="span6">
+    <div class="text-center"><img src="{{ media('img/lightbeam/Lightbeam_partners_fordfoundation.png') }}" alt="Ford Foundation" class="partner-logo"></div>
+    <p class="text-left">
+      <a href="http://www.fordfoundation.org/" target="_blank">福特基金會 (Ford Foundation)</a>亦為非營利組織，以提升人類福祉為使命。公司與機構只要致力於強化民主價值、縮小貧富差距、主持社會正義、促成人類成就、強化國際合作關係，該基金會均樂意給予協助。
+    </p>
+  </div>
+  <div class="span6">
+    <div class="text-center"><img src="{{ media('img/lightbeam/Lightbeam_partners_ecuad.png') }}" alt="SIM Centre" class="partner-logo"></div>
+    <p class="text-left">
+      位於艾蜜莉卡藝術及設計大學 (Emily Carr University of Art and Design) 的 <a href="http://www.simcentre.ca/" target="_blank">Social + Interactive Media (SIM) Centre</a>，支援多樣的設計與媒體專案，讓不列顛哥倫比亞省最富創造力的師生，能將本身的創新理念、設計技巧、研究專業知識等，直接提供給所需的公司所用。
+    </p>
+  </div>
+</section>
+
+{% endblock %}

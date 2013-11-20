@@ -9,8 +9,8 @@ from django.conf import settings
 from django.http import (HttpResponsePermanentRedirect,
                          HttpResponseRedirect)
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
-from django.core.context_processors import csrf
 from django.views.decorators.vary import vary_on_headers
+from django.views.generic.base import TemplateView
 
 import basket
 from lib import l10n_utils
@@ -20,10 +20,10 @@ from funfactory.urlresolvers import reverse
 
 from bedrock.firefox import version_re
 from bedrock.firefox.forms import SMSSendForm
-from bedrock.mozorg.forms import WebToLeadForm
-from bedrock.firefox.platforms import load_devices
+from bedrock.mozorg.context_processors import funnelcake_param
+from bedrock.mozorg.views import process_partnership_form
 from bedrock.firefox.utils import is_current_or_newer
-from bedrock.firefox.firefox_details import firefox_details
+from bedrock.firefox.firefox_details import firefox_details, mobile_details
 from lib.l10n_utils.dotlang import _
 
 UA_REGEXP = re.compile(r"Firefox/(%s)" % version_re)
@@ -39,13 +39,19 @@ LOCALE_OS_URLS = {
 }
 
 LOCALE_OS_RELEASE_URLS = {
-    'de': 'https://blog.mozilla.org/press-de/2013/07/01/mozilla-und-partner-machen-sich-bereit-fur-den-ersten-firefox-os-launch/',
-    'en-GB': 'https://blog.mozilla.org/press-uk/2013/07/01/mozilla-and-partners-prepare-to-launch-first-firefox-os-smartphones/',
-    'en-US': 'https://blog.mozilla.org/blog/2013/07/01/mozilla-and-partners-prepare-to-launch-first-firefox-os-smartphones',
+    'de': 'https://blog.mozilla.org/press-de/2013/07/01/'
+          'mozilla-und-partner-machen-sich-bereit-fur-den-ersten-firefox-os-launch/',
+    'en-GB': 'https://blog.mozilla.org/press-uk/2013/07/01/'
+             'mozilla-and-partners-prepare-to-launch-first-firefox-os-smartphones/',
+    'en-US': 'https://blog.mozilla.org/blog/2013/07/01/'
+             'mozilla-and-partners-prepare-to-launch-first-firefox-os-smartphones',
     'es-ES': 'https://blog.mozilla.org/press-es/?p=482',
-    'fr': 'https://blog.mozilla.org/press-fr/2013/07/01/mozilla-et-ses-partenaires-preparent-le-lancement-des-premiers-smartphones-sous-firefox-os/',
-    'it': 'https://blog.mozilla.org/press-it/2013/07/01/mozilla-e-i-suoi-partner-si-preparano-al-lancio-dei-primi-smartphone-con-firefox-os/',
-    'pl': 'https://blog.mozilla.org/press-pl/2013/07/01/mozilla-wraz-z-partnerami-przygotowuje-sie-do-wprowadzenia-na-rynek-pierwszych-smartfonow-z-firefox-os/',
+    'fr': 'https://blog.mozilla.org/press-fr/2013/07/01/'
+          'mozilla-et-ses-partenaires-preparent-le-lancement-des-premiers-smartphones-sous-firefox-os/',
+    'it': 'https://blog.mozilla.org/press-it/2013/07/01/'
+          'mozilla-e-i-suoi-partner-si-preparano-al-lancio-dei-primi-smartphone-con-firefox-os/',
+    'pl': 'https://blog.mozilla.org/press-pl/2013/07/01/'
+          'mozilla-wraz-z-partnerami-przygotowuje-sie-do-wprowadzenia-na-rynek-pierwszych-smartfonow-z-firefox-os/',
 }
 
 INSTALLER_CHANNElS = [
@@ -76,6 +82,13 @@ def get_js_bundle_files(bundle):
 JS_COMMON = get_js_bundle_files('partners_common')
 JS_MOBILE = get_js_bundle_files('partners_mobile')
 JS_DESKTOP = get_js_bundle_files('partners_desktop')
+
+
+def get_latest_version(product='firefox', channel='release'):
+    if product == 'mobile':
+        return mobile_details.latest_version(channel)
+    else:
+        return firefox_details.latest_version(channel)
 
 
 def installer_help(request):
@@ -124,18 +137,12 @@ def windows_billboards(req):
         major_version = float(major_version)
         minor_version = float(minor_version)
         if major_version == 5 and minor_version == 1:
-            return l10n_utils.render(req, 'firefox/unsupported-winxp.html')
-    return l10n_utils.render(req, 'firefox/unsupported-win2k.html')
+            return l10n_utils.render(req, 'firefox/unsupported/winxp.html')
+    return l10n_utils.render(req, 'firefox/unsupported/win2k.html')
 
 
 def fx_home_redirect(request):
     return HttpResponseRedirect(reverse('firefox.fx'))
-
-
-def platforms(request):
-    file = settings.MEDIA_ROOT + '/devices.csv'
-    return l10n_utils.render(request, 'firefox/mobile/platforms.html',
-                             {'devices': load_devices(request, file)})
 
 
 def dnt(request):
@@ -144,72 +151,8 @@ def dnt(request):
     return response
 
 
-@vary_on_headers('User-Agent')
-def firefox_redirect(request):
-    """
-    Redirect visitors based on their user-agent.
-
-    - Up-to-date Firefox users go to firefox/fx/.
-    - Other Firefox users go to the firefox/new/.
-    - Non Firefox users go to the new page.
-    """
-    user_agent = request.META.get('HTTP_USER_AGENT', '')
-    if not 'Firefox' in user_agent:
-        # TODO : Where to redirect bug 757206
-        return HttpResponsePermanentRedirect(reverse('firefox.new'))
-
-    user_version = '0'
-    match = UA_REGEXP.search(user_agent)
-    if match:
-        user_version = match.group(1)
-
-    if not is_current_or_newer(user_version):
-        return HttpResponsePermanentRedirect(reverse('firefox.new'))
-
-    return HttpResponseRedirect(reverse('firefox.fx'))
-
-
-@vary_on_headers('User-Agent')
-def latest_fx_redirect(request, fake_version, template_name):
-    """
-    Redirect visitors based on their user-agent.
-
-    - Up-to-date Firefox users see the whatsnew page.
-    - Other Firefox users go to the new page.
-    - Non Firefox users go to the new page.
-    """
-    user_agent = request.META.get('HTTP_USER_AGENT', '')
-    if not 'Firefox' in user_agent:
-        url = reverse('firefox.new')
-        # TODO : Where to redirect bug 757206
-        return HttpResponsePermanentRedirect(url)
-
-    user_version = '0'
-    match = UA_REGEXP.search(user_agent)
-    if match:
-        user_version = match.group(1)
-
-    if not is_current_or_newer(user_version):
-        url = reverse('firefox.new')
-        return HttpResponsePermanentRedirect(url)
-
-    locales_with_video = {
-        'en-US': 'american',
-        'en-GB': 'british',
-        'de': 'german_final',
-        'it': 'italian_final',
-        'ja': 'japanese_final',
-        'es-AR': 'spanish_final',
-        'es-CL': 'spanish_final',
-        'es-ES': 'spanish_final',
-        'es-MX': 'spanish_final',
-    }
-    return l10n_utils.render(request, template_name,
-                             {'locales_with_video': locales_with_video})
-
-
 def all_downloads(request):
-    version = firefox_details.latest_version('release')
+    version = get_latest_version()
     query = request.GET.get('q')
     return l10n_utils.render(request, 'firefox/all.html', {
         'full_builds': firefox_details.get_filtered_full_builds(version, query),
@@ -226,8 +169,6 @@ def firefox_partners(request):
     # Firefox OS 1.0 release
     locale_os_release_url = LOCALE_OS_RELEASE_URLS.get(request.locale, LOCALE_OS_RELEASE_URLS['en-US'])
 
-    form = WebToLeadForm()
-
     template_vars = {
         'locale_os_url': locale_os_url,
         'locale_os_release_url': locale_os_release_url,
@@ -235,33 +176,152 @@ def firefox_partners(request):
         'js_common': JS_COMMON,
         'js_mobile': JS_MOBILE,
         'js_desktop': JS_DESKTOP,
-        'form': form,
     }
 
-    template_vars.update(csrf(request))
+    form_kwargs = {'interest_set': 'fx'}
 
-    return l10n_utils.render(request, 'firefox/partners/index.html', template_vars)
+    return process_partnership_form(request, 'firefox/partners/index.html', 'firefox.partners.index', template_vars, form_kwargs)
 
 
-def firstrun_new(request, view):
-    # only Firefox users should see the firstrun pages
-    user_agent = request.META.get('HTTP_USER_AGENT', '')
-    if not 'Firefox' in user_agent:
-        url = reverse('firefox.new')
-        return HttpResponsePermanentRedirect(url)
+def releases_index(request):
+    releases = {}
+    major_releases = firefox_details.firefox_history_major_releases
+    minor_releases = firefox_details.firefox_history_stability_releases
 
-    # only users on the latest version should see the
-    # new pages (for GA experiment data purity)
-    user_version = "0"
-    ua_regexp = r"Firefox/(%s)" % version_re
-    match = re.search(ua_regexp, user_agent)
-    if match:
-        user_version = match.group(1)
+    for release in major_releases:
+        releases[float(re.findall(r'^\d+\.\d+', release)[0])] = {
+            'major': release,
+            'minor': sorted(filter(lambda x: re.findall(r'^' + re.escape(release), x),
+                                   minor_releases),
+                            key=lambda x: int(re.findall(r'\d+$', x)[0]))
+        }
 
-    if not is_current_or_newer(user_version):
-        url = reverse('firefox.update')
-        return HttpResponsePermanentRedirect(url)
+    return l10n_utils.render(request, 'firefox/releases/index.html',
+                             {'releases': sorted(releases.items(), reverse=True)})
 
-    template = view + '.html'
 
-    return l10n_utils.render(request, 'firefox/firstrun/' + template)
+def latest_notes(request, product, channel='release'):
+    version = get_latest_version(product, channel)
+    path = [
+        product,
+        re.sub(r'b\d+$', 'beta', version) if channel == 'beta' else version,
+        'auroranotes' if channel == 'aurora' else 'releasenotes'
+    ]
+    locale = getattr(request, 'locale', None)
+    if locale:
+        path.insert(0, locale)
+    return HttpResponseRedirect('/' + '/'.join(path) + '/')
+
+
+def latest_sysreq(request):
+    path = [
+        'firefox',
+        get_latest_version(),
+        'system-requirements'
+    ]
+    locale = getattr(request, 'locale', None)
+    if locale:
+        path.insert(0, locale)
+    return HttpResponseRedirect('/' + '/'.join(path) + '/')
+
+
+class LatestFxView(TemplateView):
+    """
+    Base class to be extended by views that require visitor to be
+    using latest version of Firefox. Classes extending this class must
+    implement either `get_template_names` function or provide
+    `template_name` class attribute.
+    """
+
+    @vary_on_headers('User-Agent')
+    def dispatch(self, *args, **kwargs):
+        return super(LatestFxView, self).dispatch(*args, **kwargs)
+
+    def redirect_to(self):
+        """
+        Redirect visitors based on their user-agent.
+
+        - Up-to-date Firefox users pass through.
+        - Other Firefox users go to the new page.
+        - Non Firefox users go to the new page.
+        """
+        query = self.request.META.get('QUERY_STRING')
+        query = '?' + query if query else ''
+
+        user_agent = self.request.META.get('HTTP_USER_AGENT', '')
+        if not 'Firefox' in user_agent:
+            return reverse('firefox.new') + query
+            # TODO : Where to redirect bug 757206
+
+        user_version = '0'
+        match = UA_REGEXP.search(user_agent)
+        if match:
+            user_version = match.group(1)
+
+        if not is_current_or_newer(user_version):
+            return reverse('firefox.new') + query
+
+        return None
+
+    def render_to_response(self, context, **response_kwargs):
+        redirect_url = self.redirect_to()
+
+        if redirect_url is not None:
+            return HttpResponsePermanentRedirect(redirect_url)
+        else:
+            return l10n_utils.render(self.request,
+                                     self.get_template_names(),
+                                     context,
+                                     **response_kwargs)
+
+
+class FirstrunView(LatestFxView):
+    funnelcake_campaign = '25'
+
+    def get_template_names(self):
+        locale = l10n_utils.get_locale(self.request)
+        fc_ctx = funnelcake_param(self.request)
+
+        if (locale == 'en-US' and
+                fc_ctx.get('funnelcake_id', 0) == self.funnelcake_campaign):
+
+            template = 'firefox/firstrun-a.html'
+        else:
+            template = 'firefox/firstrun.html'
+
+        return template
+
+
+class WhatsnewView(LatestFxView):
+    # Locales targeted for FxOS
+    fxos_locales = ['pl']
+
+    locales_with_video = {
+        'en-US': 'american',
+        'en-GB': 'british',
+        'de': 'german_final',
+        'it': 'italian_final',
+        'ja': 'japanese_final',
+        'es-AR': 'spanish_final',
+        'es-CL': 'spanish_final',
+        'es-ES': 'spanish_final',
+        'es-MX': 'spanish_final',
+    }
+
+    def get_context_data(self, **kwargs):
+        ctx = super(WhatsnewView, self).get_context_data(**kwargs)
+
+        locale = l10n_utils.get_locale(self.request)
+
+        if (locale not in self.fxos_locales):
+            ctx['locales_with_video'] = self.locales_with_video
+
+        return ctx
+
+    def get_template_names(self):
+        locale = l10n_utils.get_locale(self.request)
+        if locale in self.fxos_locales:
+            template = 'firefox/whatsnew-fxos.html'
+        else:
+            template = 'firefox/whatsnew.html'
+        return template

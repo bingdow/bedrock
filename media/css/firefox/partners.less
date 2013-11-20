@@ -7,6 +7,11 @@
 @localBlue:     #43a6e2;
 @localBlueDark: #247ac1;
 
+#pageslide {
+  width: 300px;
+  background-size: 100% !important;
+}
+
 .logos {
     list-style-type: none;
     padding: 0;
@@ -459,10 +464,17 @@
     display: none;
 }
 
-.sf-form.completed { display: none; }
-
 .form-results {
     display: none;
+}
+
+.form-success {
+    .form-results {
+        display: block;
+    }
+    .sf-form {
+        display: none;
+    }
 }
 
 .js #form {
@@ -495,10 +507,13 @@
     }
 
     .field {
-        padding: 5px 0;
+        padding: 0 0;
     }
 
     input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    input[type="tel"],
     select,
     textarea {
         width: 240px;

@@ -1,0 +1,482 @@
+article.main-column ul, ol {
+  list-style: none;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.animate(@settings) {
+  animation: @settings;
+  -moz-animation: @settings;
+  -webkit-animation: @settings;
+  -o-animation: @settings;
+  -ms-animation: @settings;
+}
+
+.animation-delay(@time) {
+  animation-delay: @time;
+  -moz-animation-delay: @time;
+  -webkit-animation-delay: @time;
+  -o-animation-delay: @time;
+  -ms-animation-delay: @time;
+}
+
+div#main-content {
+  padding-bottom: 0;
+}
+
+ul#contentTab li#intern-tab {
+	padding: 0;
+	background: #FFF;
+	position: relative;
+	overflow: hidden;
+}
+
+.apply h4 {
+	display: inline-block;
+	width: 180px;
+	line-height: 50px;
+	margin: 0;
+	vertical-align: top;
+}
+
+.poster-divider {
+	background: #000;
+	left: 410px;
+	top: 405px;
+	z-index: 10;
+	width: 2px;
+	height: 100%;
+	position: absolute;
+}
+
+.poster {
+	width: 100%;
+	float: left;
+    margin-top: 30px;
+}
+
+.poster-left {
+	width: 410px;
+	float: left;
+}
+
+.poster-right {
+	width: 510px;
+	float: left;
+}
+
+.description {
+	padding: 0 30px 30px 30px;
+}
+
+.firefox-logo {
+	background: url(/media/img/mocotw/about/intern/logo_firefox.png);
+	width: 186px;
+	height: 240px;
+	margin: auto;
+	margin-top: -100px;
+}
+
+.intern-title {
+	background: url(/media/img/mocotw/about/intern/title01.png);
+	width: 369px;
+	height: 95px;
+	margin-left: 30px;
+}
+.intern-title h2 {
+    text-indent: -999999px;
+}
+
+.dev-doll {
+	background: url(/media/img/mocotw/about/intern/pic_engineer.gif) no-repeat;
+    background-size: 100% 100%;
+	width: 151px;
+	height: 200px;
+	position: relative;
+    margin-top: -120px;
+    margin-right: -50px;
+    float: right;
+}
+
+.dev-title {
+	background: url(/media/img/mocotw/about/intern/title02.png) no-repeat;
+	width: 100%;
+	height: 79px;
+	margin-left: 30px;
+}
+.dev-title h3 {
+    text-indent: -999999px;
+}
+
+a.dev-apply {
+	background: url(/media/img/mocotw/about/intern/btn_E.png);
+	width: 140px;
+	height: 47px;
+	display: inline-block;
+}
+a.dev-apply:hover {
+	background: url(/media/img/mocotw/about/intern/btn_E_ov.png);
+}
+
+.mktg-doll {
+	background: url(/media/img/mocotw/about/intern/pic_marketing.gif) no-repeat;
+	width: 180px;
+	height: 200px;
+	position: relative;
+    background-size: 100% 100%;
+    margin-top: -120px;
+    margin-right: -50px;
+    float: right;
+}
+
+.mktg-title {
+	background: url(/media/img/mocotw/about/intern/title03.png) no-repeat;
+	width: 100%;
+	height: 79px;
+	margin-left: 30px;
+}
+.mktg-title h3 {
+    text-indent: -999999px;
+}
+a.mktg-apply {
+	background: url(/media/img/mocotw/about/intern/btn_M.png);
+	width: 140px;
+	height: 47px;
+	display: inline-block;
+}
+a.mktg-apply:hover {
+	background: url(/media/img/mocotw/about/intern/btn_M_ov.png);
+}
+
+.face {
+	background: url(/media/img/mocotw/about/intern/face.png) no-repeat center;
+	width: 920px;
+	height: 174px;
+	float: left;
+	z-index: 10;
+	position: absolute;
+}
+.face-blush {
+	background: url(/media/img/mocotw/about/intern/face_red.png) no-repeat center;
+	width: 920px;
+	height: 174px;
+	float: left;
+	z-index: 11;
+	position: absolute;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opactiy 0.5s ease-in-out;
+  -ms-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0;
+}
+.face-blush:hover {
+	opacity: 1;
+}
+
+.hands {
+	background: url(/media/img/mocotw/about/intern/bg_hand.gif);
+	width: 920px;
+	height: 256px;
+	float: left;
+	margin-top: 150px;
+}
+
+.balls {
+	width: 920px;
+	height: 142px;
+	float: left;
+	position: relative;
+}
+
+.left-eye {
+	background: url(/media/img/mocotw/about/intern/eye_L.png) no-repeat center;
+	width: 88px;
+	height: 73px;
+	top: 80px;
+	left: 300px;
+	position: absolute;
+	z-index: 9;
+}
+.right-eye {
+	background: url(/media/img/mocotw/about/intern/eye_R.png) no-repeat center;
+	width: 85px;
+	height: 72px;
+	top: 70px;
+	right: 290px;
+	position: absolute;
+	z-index: 9;
+}
+
+.blink-mktg {
+	background: url(/media/img/mocotw/about/intern/blink.png) no-repeat center;
+	width: 10px;
+	height: 15px;
+	top: 18px;
+	left: 80px;
+	position: absolute;
+    background-size: 100% 100%;
+  .animate(blink 0.3s infinite linear);
+}
+
+.globe {
+	background: url(/media/img/mocotw/about/intern/globe.png) no-repeat center;
+	width: 25px;
+	height: 25px;
+	top: 77px;
+	left: 130px;
+    background-size: 100% 100%;
+	position: absolute;
+  .animate(rotate 3s infinite linear);
+}
+
+.circle {
+	position: absolute;
+	color: #FFFFFF;
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 50%;
+	background: black;
+  .animate(rainbow 1s infinite linear);
+}
+.pillar {
+	position: absolute;
+	background: black;
+	width: 2px;
+	bottom: 0;
+  .animate(rainbow 1s infinite linear);
+}
+
+#c1 {
+	top: 0;
+	left: 60px;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 9px;
+}
+#c2 {
+	top: 30px;
+	left: 125px;
+	width: 70px;
+	height: 70px;
+	line-height: 70px;
+	font-size: 13px;
+	.animation-delay(0.1s);
+}
+#c3 {
+	top: 5px;
+	left: 270px;
+	width: 60px;
+	height: 60px;
+	line-height: 60px;
+	font-size: 12px;
+	.animation-delay(0.2s);
+}
+#c4 {
+	top: 40px;
+	left: 440px;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 10px;
+	.animation-delay(0.3s);
+}
+#c5 {
+	top: 5px;
+	left: 570px;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 10px;
+	.animation-delay(0.4s);
+}
+#c6 {
+	top: 30px;
+	left: 640px;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 8px;
+	.animation-delay(0.5s);
+}
+#c7 {
+	top: 20px;
+	left: 750px;
+	width: 40px;
+	height: 40px;
+	padding: 10px;
+	line-height: 19px;
+	font-size: 10px;
+	word-wrap: break-word;
+	.animation-delay(0.6s);
+}
+#c8 {
+	top: 55px;
+	left: 835px;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 9px;
+	.animation-delay(0.7s);
+}
+
+#p1 {
+	height: 120px;
+	left: 79px;
+}
+#p2 {
+	height: 80px;
+	left: 159px;
+	.animation-delay(0.1s);
+}
+#p3 {
+	height: 120px;
+	left: 299px;
+	.animation-delay(0.2s);
+}
+#p4 {
+	height: 80px;
+	left: 464px;
+	.animation-delay(0.3s);
+}
+#p5 {
+	height: 120px;
+	left: 584px;
+	.animation-delay(0.4s);
+}
+#p6 {
+	height: 80px;
+	left: 664px;
+	.animation-delay(0.5s);
+}
+#p7 {
+	height: 120px;
+	left: 779px;
+	.animation-delay(0.6s);
+}
+#p8 {
+	height: 80px;
+	left: 854px;
+	.animation-delay(0.7s);
+}
+
+
+.blinkKeyframes {
+  0% {
+    background-size: 100% 100%;
+  }
+  50% {
+    background-size: 50% 50%;
+  }
+  100% {
+    background-size: 100% 100%;
+  }
+}
+
+.rotateKeyframes {
+  from {
+    transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+
+.rainbowKeyframes {
+  0% {
+    background: #FBAF3A;
+  }
+  9% {
+    background: #D9E026;
+  }
+  18% {
+    background: #3AB449;
+  }
+  27% {
+    background: #00A99C;
+  }
+  36% {
+    background: #29AAE1;
+  }
+  45% {
+    background: #0C71B9;
+  }
+  54% {
+    background: #92288D;
+  }
+  63% {
+    background: #662F8F;
+  }
+  72% {
+    background: #ED1F79;
+  }
+  80% {
+    background: #D31C5B;
+  }
+  88% {
+    background: #EB2026;
+  }
+  96% {
+    background: #F79320;
+  }
+  100% {
+    background: #FBAF3A;
+  }
+}
+
+@keyframes blink {
+  .blinkKeyframes();
+}
+@-moz-keyframes blink {
+  .blinkKeyframes();
+}
+@-webkit-keyframes blink {
+  .blinkKeyframes();
+}
+@-o-keyframes blink {
+  .blinkKeyframes();
+}
+@-ms-keyframes blink {
+  .blinkKeyframes();
+}
+
+@keyframes rotate {
+  .rotateKeyframes();
+}
+@-moz-keyframes rotate {
+  .rotateKeyframes();
+}
+@-webkit-keyframes rotate {
+  .rotateKeyframes();
+}
+@-o-keyframes rotate {
+  .rotateKeyframes();
+}
+@-ms-keyframes rotate {
+  .rotateKeyframes();
+}
+
+@keyframes rainbow {
+  .rainbowKeyframes();
+}
+@-moz-keyframes rainbow {
+  .rainbowKeyframes();
+}
+@-webkit-keyframes rainbow {
+  .rainbowKeyframes();
+}
+@-o-keyframes rainbow {
+  .rainbowKeyframes();
+}
+@-ms-keyframes rainbow {
+  .rainbowKeyframes();
+}

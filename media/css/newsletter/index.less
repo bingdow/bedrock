@@ -1,0 +1,423 @@
+h1.section-title {
+  margin-bottom: 30px;
+}
+
+/*** @Thumnails */
+.entry-thumbnail {
+  position: absolute;
+  top: 15px;
+  right: 0;
+  width: 70px;
+  height: 70px;
+  display: block;
+  border: 2px solid white;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.5);
+  vertical-align: middle;
+}
+
+.thumbnail-12 {
+  background: url('/newsletter/2013-10/images/mainpic.png');
+  background-size: auto 100%;
+  background-position: top right;
+}
+.thumbnail-11 {
+  background: url('/newsletter/2013-09/images/mainpic.jpg');
+  background-size: auto 100%;
+  background-position: 0 center;
+}
+.thumbnail-10 {
+  background: url('/newsletter/2013-08/images/mainpic.png');
+  background-size: auto 100%;
+  background-position: 80% center;
+}
+.thumbnail-09 {
+  background: url('/newsletter/2013-07/ice-small.jpg');
+  background-size: 100% 100%;
+}
+.thumbnail-08 {
+  background: url('/newsletter/2013-06/blue-small.jpg');
+  background-size: 100% 100%;
+}
+.thumbnail-07 {
+  background: url('/newsletter/2013-05/grey-small.jpg');
+  background-size: 100% 100%;
+}
+.thumbnail-06 {
+  background: url('/newsletter/2013-04/cafe-small.jpg');
+  background-size: 100% 100%;
+}
+.thumbnail-05 {
+  background: url('/newsletter/2013-03/flower-small.jpg');
+  background-size: 100% 100%;
+}
+.thumbnail-04 {
+  background: url('/newsletter/2012-11/Wallpaper-A.jpg');
+  background-size: 100% 100%;
+}
+.thumbnail-03 {
+  background: url('/newsletter/2012-10/Wallpaper-B.jpg');
+  background-size: 100% 100%;
+}
+.thumbnail-02 {
+  background: url('/newsletter/2012-09/moon-small.jpg');
+  background-size: 100% 100%;
+}
+.thumbnail-01 {
+  background: url('/newsletter/2012-08/love-small.jpg');
+  background-size: 100% 100%;
+}
+
+/*** @Titles */
+.page-title {
+  margin: -.3em 0 24px;
+}
+.archive .page-title,
+.search-results .page-title {
+  font-size: 1.75em;
+  letter-spacing: -0.5px;
+  margin-top: 0;
+}
+.entry-title {
+  width: 800px;
+  font-size: 2em;
+  letter-spacing: -1px;
+  margin: .5em 0 .5em;
+  min-height: 55px;
+}
+.single-post .entry-title,
+.page .entry-title {
+  font-size: 3em;
+  letter-spacing: -2px;
+}
+.show-comments.no-author .entry-title {
+  float: left;
+  width: 410px;
+}
+
+/*** Entry @Header */
+.entry-header {
+  margin: 0 0 20px;
+  padding: .5em 0 0;
+  position: relative;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+.entry-header:after { clear: both; content: "."; display: block; height: 0; visibility: hidden; }
+.post .entry-header {
+  padding-left: 92px;
+}
+.page .entry-title {
+  margin: 0;
+  min-height: 0;
+}
+.page .entry-header,
+.single-post .entry-header,
+.no-author .entry-header {
+  padding-bottom: 0;
+}
+.post.no-results .entry-header {
+  padding-left: 0;
+}
+.post.no-results .entry-title {
+  min-height: auto;
+}
+.entry-header .share {
+  float: right;
+  text-align: right;
+}
+.entry-header .socialshare #share-options {
+  left: auto;
+  right: 0;
+}
+
+/*** Post @Author */
+.entry-header .vcard {
+  background: #fff;
+  background: -moz-linear-gradient(left, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.75) 10%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.75) 90%, rgba(255,255,255,0.75) 100%);
+  background: -o-linear-gradient(left, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.75) 10%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.75) 90%, rgba(255,255,255,0.75) 100%);
+  background: -webkit-linear-gradient(left, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.75) 10%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.75) 90%, rgba(255,255,255,0.75) 100%);
+  background: linear-gradient(left, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.75) 10%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.75) 90%, rgba(255,255,255,0.75) 100%);
+  border: 1px solid #fff;
+  float: left;
+  font: 1em/1 "Open Sans Light", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", Calibri, sans-serif;
+  margin: 0 0 10px -92px;
+  -ms-box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  -o-box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  padding: 15px 20px 15px 65px;
+  position: relative;
+  width: 415px;
+}
+.no-comments .entry-header .vcard {
+  width: 530px;
+}
+.entry-header cite {
+  font-style: normal;
+}
+.entry-header .vcard img {
+  border: 1px solid #fff;
+  left: 0;
+  left: 20px;
+  position: absolute;
+  top: .75em;
+}
+.entry-header .vcard a:hover img,
+.entry-header .vcard a:focus img,
+.entry-header .vcard a:active img {
+  border-color: inherit;
+}
+
+
+/*** @Posted date */
+.entry-posted {
+  background: url("/media/img/newsletter/bg-date-lt.png") center top no-repeat;
+  font: 10px/1 "Open Sans Light", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", Calibri, sans-serif;
+  left: 0;
+  padding: 6px 10px 16px;
+  position: absolute;
+  text-align: center;
+  top: 17px;
+  width: 48px;
+}
+.entry-posted a:link,
+.entry-posted a:visited,
+.entry-posted a:hover,
+.entry-posted a:focus,
+.entry-posted a:active {
+  color: #3c3c3c;
+}
+.entry-posted .posted-month {
+  display: block;
+  font-size: 1.4em;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+.entry-posted .posted-date {
+  display: block;
+  font-size: 1.5em;
+  line-height: 1.35;
+  font-weight: bold;
+}
+.entry-posted .posted-year {
+  display: block;
+  font-size: 1.4em;
+  line-height: 1.25;
+}
+
+
+/* @Pagination *********/
+.pages {
+  margin-bottom: 2em;
+}
+.pages span, .pages b, .pages a {
+  background: #eee;
+  border-radius: 3px;
+  margin-right: 2px;
+  padding: 1px 6px;
+}
+.pages .current, .pages b {
+  background: #447bc4;
+  color: #fff;
+}
+.pages a b {
+  background: transparent;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+.nav-paging {
+  background-color: #fff;
+  box-shadow: 0 1px 0 0 rgba(0,0,0,0.1);
+  font: 1em/1 "Open Sans Light", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", Calibri, sans-serif;
+  margin: 24px 0;
+  padding: 12px 20px;
+}
+.nav-paging ul {
+  list-style: none;
+  margin: 0;
+}
+.nav-paging ul:after { clear: both; content: "."; display: block; height: 0; visibility: hidden; }
+
+.nav-paging .prev {
+  float: left;
+  text-align: left;
+  width: 45%;
+}
+.nav-paging .prev a:before {
+  content: "\00AB\00A0"; /* laquo nbsp */
+  font-size: 1.2em;
+}
+
+.nav-paging .next {
+  float: right;
+  text-align: right;
+  width: 45%;
+}
+.nav-paging .next a:after {
+  content: "\00A0\00BB"; /* nbsp raquo */
+  font-size: 1.2em;
+}
+
+/*  @Tablet @Layout: 768px */
+@media only screen and (min-width: 768px) and (max-width: 1000px) {
+
+  .wrap {
+    width: 760px;
+  }
+  .main {
+    width: 520px;
+  }
+  .sub {
+    float: right;
+    width: 160px;
+    margin: 0 10px;
+  }
+
+  #site-title {
+    font-size: 3em;
+    letter-spacing: -2px;
+    margin-left: 0;
+  }
+  #site-description {
+    font-size: 1.5em;
+    letter-spacing: -.5px;
+  }
+
+  .entry-header .vcard {
+    width: 310px;
+  }
+
+  .entry-title {
+    width: 580px;
+  }
+
+  .no-comments .entry-header .vcard {
+    width: 430px;
+  }
+  .wp-caption {
+    max-width: 95%;
+  }
+
+  #site-info .wrap {
+    width: 720px;
+    overflow: auto;
+  }
+
+  #foot-logo,
+  #colophon,
+  #nav-meta {
+    margin: 0 10px 1em 10px;
+    width: 220px;
+  }
+  .featured-posts ul {
+    margin: 0;
+  }
+  .featured-posts .feature {
+    width: 146px;
+    margin-right: 20px;
+  }
+  .featured-posts .wp-post-image {
+    width: 135px;
+    margin: 0 -5px .75em -5px;
+  }
+  .sub .featured-posts {
+    padding: 5px 10px;
+  }
+  .sub .featured-posts .feature {
+    width: auto;
+  }
+  .sub .featured-posts .wp-post-image {
+    margin: 0 -5px .75em -5px;
+    width: 110px;
+    float: none;
+  }
+
+}
+
+/*  @Mobile @Layout: 320px */
+@media only screen and (max-width: 767px) {
+  #wrapper {
+    width: 480px;
+  }
+
+  .post .entry-title {
+    min-height: 0;
+  }
+  .archive .page-title,
+  .search-results .page-title {
+    font-size: 1.75em;
+    letter-spacing: -0.5px;
+  }
+  .single .entry-title,
+  .page .entry-title {
+    font-size: 2em;
+    letter-spacing: -1px;
+    margin-bottom: .5em;
+  }
+  .post.no-author .entry-title {
+    float: none;
+    width: 400px;
+  }
+  .post .entry-header {
+    padding-left: 0;
+  }
+  .entry-header .edit {
+    margin-left: 0;
+  }
+  .entry-title {
+    font-size: 1.5em;
+  }
+  .entry-posted {
+    background-image: none;
+    font-size: 1em;
+    margin: 0 0 1em;
+    padding: 0;
+    position: static;
+    text-align: left;
+    width: auto;
+  }
+  .entry-posted .posted-month {
+    display: inline;
+    font-size: 1em;
+    text-transform: none;
+  }
+  .entry-posted .posted-date {
+    display: inline;
+    font-size: 1em;
+    line-height: 1.2;
+  }
+  .entry-posted .posted-year {
+    display: inline;
+    font-size: 1em;
+  }
+
+  .post .entry-header .vcard {
+    float: none;
+    margin: .5em 0;
+    padding: 6px 12px;
+    width: auto;
+  }
+  .entry-header .avatar {
+    display: none;
+  }
+
+}
+
+
+@media only screen and (max-width: 480px) {
+  #wrapper {
+    width: 320px;
+  }
+  .post.no-author .entry-title {
+    width: 240px;
+  }
+  .entry-header {
+//    height: 120px;
+  }
+  .entry-title {
+    font-size: 1.2em;
+  }
+  .entry-thumbnail {
+//    top: auto;
+//    bottom: 0;
+  }
+}

@@ -1,0 +1,168 @@
+@import "../sandstone/lib";
+
+h2 {
+  margin: 20px 0 50px 0;
+}
+
+.sidebar h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+a.moreLink {
+//  float: right;
+  width: 100%;
+  display: block;
+  text-align: right;
+}
+
+a.moreLink:after {
+  content: " »";
+}
+
+#main-feature {
+  padding-bottom: 0;
+}
+
+nav.menu-bar {
+  margin-bottom: 30px;
+}
+
+.row {
+  display: block;
+  margin-bottom: 30px;
+  .clearfix()
+}
+
+.span3 {
+  width: 360px;
+  float: right;
+}
+
+.leftCol {
+  width: 100px;
+  float: left;
+}
+
+.rowImg {
+  overflow: hidden;
+  width: 70px;
+  height: 70px;
+  margin-left: 15px;
+  float: left;
+  background-repeat: no-repeat;
+  border: 2px solid white;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/*** @Posted date */
+.entry-posted {
+  background: url("/media/img/newsletter/bg-date-lt.png") center top no-repeat;
+  font: 10px/1 "Open Sans Light", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", Calibri, sans-serif;
+  padding: 6px 10px 16px;
+  text-align: center;
+  width: 48px;
+  float: left;
+  display: block;
+  margin: 0 0 20px 15px;
+}
+
+.entry-posted a:link,
+.entry-posted a:visited,
+.entry-posted a:hover,
+.entry-posted a:focus,
+.entry-posted a:active {
+  color: #3c3c3c;
+}
+
+.entry-posted .posted-month {
+  display: block;
+  font-size: 1.4em;
+  text-transform: uppercase;
+}
+
+.entry-posted .posted-date {
+  display: block;
+  font-size: 2.6em;
+  font-weight: bold;
+}
+
+.entry-posted .posted-year {
+  display: block;
+  font-size: 1.4em;
+}
+
+.sidebar {
+  margin-left: 90px;
+  width: 300px;
+}
+
+.sidebar .sidebar-inset {
+  background-color: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid rgb(255, 255, 255);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1) inset;
+  padding: 20px 20px 20px 20px;
+}
+
+@media only screen and (max-width: @breakDesktop) {
+  .span3 {
+    float: left;
+    margin-left: 30px;
+  }
+
+  .sidebar {
+    width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+    .event-calendar, .sidebar-inset {
+      display: inline-block;
+      width: 300px;
+      margin-left: 20px;
+      vertical-align: top;
+    }
+  }
+
+}
+
+@media only screen and (max-width: @breakTablet) {
+  .row {
+    width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    .leftCol {
+      width: 400px;
+    }
+  }
+  .sidebar {
+    width: 480px;
+    .event-calendar, .sidebar-inset {
+      display: block;
+      margin: 30px auto;
+    }
+  }
+}
+
+@media only screen and (max-width: @breakMobileLandscape) {
+  .main-column {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .row {
+    width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+    .leftCol {
+      width: 260px;
+    }
+    .span3 {
+      width: 260px;
+      margin-left: 10px;
+    }
+  }
+  .sidebar {
+    width: 300px;
+    .event-calendar, .sidebar-inset {
+      width: 260px;
+    }
+  }
+}

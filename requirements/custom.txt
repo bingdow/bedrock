@@ -1,2 +1,9 @@
 gunicorn==0.17.4
 MySQL-python==1.2.4
+google-api-python-client==1.2
+httplib2==0.8
+premailer==1.13
+html2text==3.200.3
+PIL==1.1.7
+BeautifulSoup==3.2.1
+pyga==2.5.0

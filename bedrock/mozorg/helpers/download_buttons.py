@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -22,6 +23,8 @@ import jinja2
 from product_details import product_details
 from bedrock.mocotw.utils import latest_aurora_version, latest_nightly_version, make_nightly_link, make_aurora_mobile_link, make_nightly_mobile_link
 
+from lib.l10n_utils import get_locale
+
 
 download_urls = {
     'transition': '/{locale}/products/download.html',
@@ -34,6 +37,10 @@ download_urls = {
     'aurora-mobile': 'https://ftp.mozilla.org/pub/mozilla.org/mobile/'
                      'nightly/latest-mozilla-aurora-android/en-US/'
                      'fennec-%s.en-US.android-arm.apk' %
+                     product_details.mobile_details['alpha_version'],
+    'aurora-mobile-l10n': 'https://ftp.mozilla.org/pub/mozilla.org/mobile/'
+                     'nightly/latest-mozilla-aurora-android-l10n/'
+                     'fennec-%s.zh-TW.android-arm.apk' %
                      product_details.mobile_details['alpha_version'],
 }
 
@@ -197,10 +204,10 @@ def download_firefox(ctx, build='release', small=False, icon=True,
     """
     alt_build = '' if build == 'release' else build
     platform = 'mobile' if mobile else 'desktop'
-    locale = locale or ctx['request'].locale
+    locale = locale or get_locale(ctx['request'])
     funnelcake_id = ctx.get('funnelcake_id', False)
     dom_id = dom_id or 'download-button-%s-%s' % (platform, build)
-
+    print locale
     def latest(locale):
         if build == 'nightly':
             return latest_nightly_version(locale)
@@ -284,6 +291,9 @@ def download_firefox(ctx, build='release', small=False, icon=True,
     # Get the native name for current locale
     langs = product_details.languages
     locale_name = langs[locale]['native'] if locale in langs else locale
+
+    if build not in ('nightly', 'aurora', 'beta'):
+        locale_name = u'台灣版 (繁體中文)'
 
     data = {
         'locale_name': locale_name,
